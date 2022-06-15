@@ -1,0 +1,15 @@
+export const wods = [
+  { name: "Angie", typeOfResult: "time" },
+  { name: "Anny", typeOfResult: "time" },
+  { name: "Barbara", typeOfResult: "time" },
+  { name: "Cindy", typeOfResult: "number" },
+  { name: "Chelsea", typeOfResult: "time" },
+  { name: "Diane", typeOfResult: "time" },
+  { name: "Elizabeth", typeOfResult: "time" },
+  { name: "Fran", typeOfResult: "time" },
+  { name: "Grace", typeOfResult: "time" },
+  { name: "Isabel", typeOfResult: "time" },
+  { name: "Jackie", typeOfResult: "time" },
+  { name: "Mary", typeOfResult: "number" },
+  { name: "Nancy", typeOfResult: "number" },
+];

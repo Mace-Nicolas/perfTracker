@@ -1,0 +1,27 @@
+.categoryButton {
+    border-radius: 10px;
+    padding: 10px 50px;
+    font-weight: 700;
+    font-size: 18px;
+    transition: all .2s ease-in-out;
+}
+.unactiveCatButton {
+    background: rgba(217, 217, 217, 0.93);
+    color: black;
+    
+}
+.activeCatButton {
+    background: rgba(56, 56, 56, 0.82);
+    color: white;
+
+}
+
+.addButton {
+    border-radius: 10px;
+    padding: 10px 30px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all .2s ease-in-out;
+    background-color: green;
+    color: white;
+}
