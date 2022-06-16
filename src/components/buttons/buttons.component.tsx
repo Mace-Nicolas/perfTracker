@@ -36,3 +36,29 @@ export const AddButton = ({
     </button>
   );
 };
+export const CancelButton = ({
+  title,
+  onClick,
+}: {
+  title: string;
+  onClick: () => void;
+}) => {
+  return (
+    <button className='cancelButton tracking-wider' onClick={onClick}>
+      {title}
+    </button>
+  );
+};
+export const LoginButton = ({
+  title,
+  onClick,
+}: {
+  title: string;
+  onClick: () => void;
+}) => {
+  return (
+    <button className='loginButton tracking-wider my-4' onClick={onClick}>
+      {title}
+    </button>
+  );
+};

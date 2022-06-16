@@ -25,3 +25,23 @@
     background-color: green;
     color: white;
 }
+.cancelButton {
+    border-radius: 10px;
+    padding: 10px 30px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all .2s ease-in-out;
+    background-color: rgb(191, 16, 16);
+    color: white;
+}
+.loginButton {
+    border-radius: 5px;
+    width: 100%;
+    padding: 12px 30px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all .2s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.422);
+    letter-spacing: 5px;
+    color: white;
+}

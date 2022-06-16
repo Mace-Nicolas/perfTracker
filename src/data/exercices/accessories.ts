@@ -1,1 +1,3 @@
-export const accessories = [{ name: "Curl Biceps Bar" }];
+export const accessoryExercices = [
+  { name: "Curl Biceps Bar", typeOfResult: "number" },
+];

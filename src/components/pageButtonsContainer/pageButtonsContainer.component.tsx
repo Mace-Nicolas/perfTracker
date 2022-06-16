@@ -1,35 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
+import { useTypeOfExercice } from "../../context/typeOfExercice/typeOfExercice-context";
+import { setTypeOfExercice } from "../../context/typeOfExercice/typeOfExerciceActions";
 import { CategoryButton } from "../buttons/buttons.component";
 
 import "./pageButtonsContainer.component.styles.scss";
 
 const PageButtonsContainer = () => {
-  const [activeCat, setActiveCat] = useState("cardio");
+  const {
+    state: { typeOfExercice },
+    dispatch,
+  } = useTypeOfExercice();
+
   return (
     <div className='pageButtonsContainer'>
       <CategoryButton
-        onClick={() => setActiveCat("cardio")}
-        isActive={activeCat.toLowerCase() === "cardio"}
+        onClick={() => setTypeOfExercice(dispatch, "cardio")}
+        isActive={typeOfExercice.toLowerCase() === "cardio"}
         title='Cardio'
       />
       <CategoryButton
-        onClick={() => setActiveCat("gym")}
-        isActive={activeCat.toLowerCase() === "gym"}
+        onClick={() => setTypeOfExercice(dispatch, "gym")}
+        isActive={typeOfExercice.toLowerCase() === "gym"}
         title='Gym'
       />
       <CategoryButton
-        onClick={() => setActiveCat("weightlifting")}
-        isActive={activeCat.toLowerCase() === "weightlifting"}
+        onClick={() => setTypeOfExercice(dispatch, "weightlifting")}
+        isActive={typeOfExercice.toLowerCase() === "weightlifting"}
         title='Weightlifting'
       />
       <CategoryButton
-        onClick={() => setActiveCat("wod")}
-        isActive={activeCat.toLowerCase() === "wod"}
+        onClick={() => setTypeOfExercice(dispatch, "wod")}
+        isActive={typeOfExercice.toLowerCase() === "wod"}
         title='WOD'
       />
       <CategoryButton
-        onClick={() => setActiveCat("accessory")}
-        isActive={activeCat.toLowerCase() === "accessory"}
+        onClick={() => setTypeOfExercice(dispatch, "accessory")}
+        isActive={typeOfExercice.toLowerCase() === "accessory"}
         title='Accessory Work'
       />
     </div>
