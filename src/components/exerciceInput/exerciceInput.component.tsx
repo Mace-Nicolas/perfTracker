@@ -1,51 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import "./exerciceInput.component.styles.scss";
-import { useTypeOfExercice } from "../../context/typeOfExercice/typeOfExercice-context";
+import { capitalizeFirstLetter } from "../../utils/functions";
 
-import { cardioExercices } from "../../data/exercices/cardio";
-import { gymExercices } from "../../data/exercices/gym";
-import { weightliftingExercices } from "../../data/exercices/weightlifting";
-import { accessoryExercices } from "../../data/exercices/accessories";
-import { wods } from "../../data/exercices/wod";
-
-const ExerciceInput = () => {
-  const [selectedTypeOfExercice, setSelectedTypeOfExercice] =
-    useState(cardioExercices);
-  const {
-    state: { typeOfExercice },
-  } = useTypeOfExercice();
-
-  useEffect(() => {
-    switch (typeOfExercice) {
-      case "cardio":
-        return setSelectedTypeOfExercice(cardioExercices);
-      case "gym":
-        return setSelectedTypeOfExercice(gymExercices);
-      case "wod":
-        return setSelectedTypeOfExercice(wods);
-      case "weightlifting":
-        return setSelectedTypeOfExercice(weightliftingExercices);
-      case "accessory":
-        return setSelectedTypeOfExercice(accessoryExercices);
-    }
-  }, [typeOfExercice]);
-
+const ExerciceInput = ({ value, options, handleChange, label }: any) => {
   return (
     <Autocomplete
       disablePortal
-      options={selectedTypeOfExercice.map((option) => option.name)}
-      // getOptionLabel={(option) => option.name}
-
+      options={options.map((option: any) => option.name)}
+      onChange={handleChange}
+      value={value && capitalizeFirstLetter(value)}
+      isOptionEqualToValue={(option: any, value: any) =>
+        option.toLowerCase() === value.toLowerCase()
+      }
       sx={{
         width: "75%",
         background: "#D9D9D9",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         borderRadius: "10px",
       }}
-      renderInput={(params) => <TextField {...params} label='Exercice' />}
+      renderInput={(params) => <TextField {...params} label={label} />}
     />
   );
 };

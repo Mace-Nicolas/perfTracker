@@ -26,12 +26,20 @@ export const CategoryButton = ({
 export const AddButton = ({
   title,
   onClick,
+  width,
+  height,
 }: {
   title: string;
   onClick: () => void;
+  width?: string;
+  height?: string;
 }) => {
   return (
-    <button className='addButton tracking-wider' onClick={onClick}>
+    <button
+      className='addButton tracking-wider'
+      onClick={onClick}
+      style={{ width: width, height: height }}
+    >
       {title}
     </button>
   );

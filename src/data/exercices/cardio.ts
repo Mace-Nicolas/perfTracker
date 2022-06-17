@@ -1,8 +1,20 @@
 export const cardioExercices = [
-  { name: "Run", typeOfResult: "time" },
+  {
+    name: "Run",
+    typeOfResult: "time",
+    forTypes: ["time", "distance", "cal"],
+  },
 
-  { name: "Max DU unbroken", typeOfResult: "number" },
+  {
+    name: "DU",
+    typeOfResult: "number",
+    forTypes: ["time", "rep"],
+  },
 
-  { name: "Row", typeOfResult: "time" },
-  { name: "Skierg", typeOfResult: "time" },
+  { name: "Row", typeOfResult: "time", forTypes: ["time", "distance", "cal"] },
+  {
+    name: "Skierg",
+    typeOfResult: "time",
+    forTypes: ["time", "distance", "cal"],
+  },
 ];

@@ -1,4 +1,5 @@
 import React from "react";
+import { capitalizeFirstLetter } from "../../utils/functions";
 import "./inputs.component.styles.scss";
 
 export const InputBasic = ({
@@ -20,6 +21,33 @@ export const InputBasic = ({
         type={type}
         name={name}
         className='inputUserInfo w-full'
+        value={value}
+      />
+    </label>
+  );
+};
+
+export const InputAddForm = ({
+  name,
+  label,
+  type,
+  value,
+  onChange,
+}: {
+  name: string;
+  label: string;
+  type: string;
+  value: string | number;
+  onChange: (e: any) => void;
+}) => {
+  return (
+    <label className='flex flex-col w-1/3'>
+      {label} :
+      <input
+        onChange={onChange}
+        type={type}
+        name={name}
+        className='inputAddForm w-full'
         value={value}
       />
     </label>
@@ -74,6 +102,36 @@ export const SelectBasic = ({
         <option value='male'>Male</option>
         <option value='female'>Female</option>
         <option value='unknown'>I don't want to answer</option>
+      </select>
+    </label>
+  );
+};
+export const SelectAddForm = ({
+  value,
+  label,
+  options,
+  classNames,
+  onChange,
+}: {
+  value: string;
+  label: string;
+  options: string[];
+  classNames: string;
+  onChange: (e: any) => void;
+}) => {
+  return (
+    <label>
+      {label}
+      <select
+        onChange={onChange}
+        value={value}
+        className={`selectAddForm flex flex-row ${classNames}`}
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {capitalizeFirstLetter(option)}
+          </option>
+        ))}
       </select>
     </label>
   );

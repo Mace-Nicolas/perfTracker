@@ -1,13 +1,45 @@
 export const weightliftingExercices = [
-  { name: "Back Squat ", typeOfResult: "number" },
-  { name: "Front Squat ", typeOfResult: "number" },
-  { name: "Overhead Squat", typeOfResult: "number" },
+  {
+    name: "Back Squat ",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
+  {
+    name: "Front Squat ",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
+  {
+    name: "Overhead Squat",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
 
-  { name: "Deadlift", typeOfResult: "number" },
-  { name: "Bench Press", typeOfResult: "number" },
+  {
+    name: "Deadlift",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
+  {
+    name: "Bench Press",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
 
-  { name: "Clean", typeOfResult: "number" },
-  { name: "Jerk", typeOfResult: "number" },
-  { name: "Clean & Jerk", typeOfResult: "number" },
-  { name: "Snatch", typeOfResult: "number" },
+  {
+    name: "Clean",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
+  { name: "Jerk", typeOfResult: "number", forTypes: ["time", "rep", "weight"] },
+  {
+    name: "Clean & Jerk",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
+  {
+    name: "Snatch",
+    typeOfResult: "number",
+    forTypes: ["time", "rep", "weight"],
+  },
 ];
