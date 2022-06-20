@@ -30,7 +30,7 @@ export const AddButton = ({
   height,
 }: {
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
   width?: string;
   height?: string;
 }) => {

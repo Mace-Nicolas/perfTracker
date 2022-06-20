@@ -1,4 +1,5 @@
 import React from "react";
+import { useLabelNameAddForm } from "../../hooks/useLabelNameAddForm/useLabelNameAddForm.component";
 import { capitalizeFirstLetter } from "../../utils/functions";
 import "./inputs.component.styles.scss";
 
@@ -33,21 +34,23 @@ export const InputAddForm = ({
   type,
   value,
   onChange,
+  className,
 }: {
   name: string;
   label: string;
   type: string;
   value: string | number;
   onChange: (e: any) => void;
+  className?: string;
 }) => {
   return (
     <label className='flex flex-col w-1/3'>
-      {label} :
+      {useLabelNameAddForm(label)}
       <input
         onChange={onChange}
         type={type}
         name={name}
-        className='inputAddForm w-full'
+        className={`inputAddForm ${className}`}
         value={value}
       />
     </label>

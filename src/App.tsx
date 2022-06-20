@@ -4,9 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import ContextProvider from "./context";
 
 import PageContainer from "./components/pageContainer/pageContainer.component";
+import NavWrapper from "./components/navWrapper/navWrapper.component";
 
 import LoginPage from "./pages/login/login.page";
-import NavWrapper from "./components/navWrapper/navWrapper.component";
 
 const App = () => {
   return (
