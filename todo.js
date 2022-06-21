@@ -1,5 +1,6 @@
 // Convert time fo result to int
 // Connect results DB
+// Fix the bug of the time on the addResult page
 
 // Create page adding a exercice with admin review
 // Create media and billing pages

@@ -7,7 +7,7 @@ import { accessoryExercices } from "../../data/exercices/accessories";
 import { wods } from "../../data/exercices/wod";
 
 export const useForOptions = (exerciceName = "run") => {
-  const [forOptions, setForOptions] = useState<any>();
+  const [forOptions, setForOptions] = useState<string[]>();
   const exercices = [
     ...cardioExercices,
     ...gymExercices,
@@ -18,7 +18,7 @@ export const useForOptions = (exerciceName = "run") => {
 
   useEffect(() => {
     const foundExercice = exercices.find(
-      (ex: any) => ex.name.toLowerCase() === exerciceName
+      (ex: { name: string }) => ex.name.toLowerCase() === exerciceName
     );
     if (foundExercice) {
       setForOptions(foundExercice.forTypes);

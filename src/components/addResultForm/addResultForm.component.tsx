@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import BasicDatePicker from "../../basicDatePicker/basicDatePicker.component";
 import { useAccountInfo } from "../../context/accountInfos/accountInfo-context";
 import { useTypeOfExercice } from "../../context/typeOfExercice/typeOfExercice-context";
@@ -24,7 +25,9 @@ const typeOfExercices = [
 ];
 
 const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
-  const [exercice, setExercice] = useState(cardioExercices[0].name);
+  const [exercice, setExercice] = useState(
+    cardioExercices[0].name.toLowerCase()
+  );
   const [forOption, setForOption] = useState("time");
   const [forTarget, setForTarget] = useState(0);
   const [date, setDate] = useState(new Date());
@@ -46,17 +49,32 @@ const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
   const forOptions = useForOptions(exercice);
   const optionsExercice = useOptionsOfExercices();
 
-  const handleAddResultSubmit = async (e: any) => {
+  const handleAddResultSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    await createExerciceToDB(
-      email,
-      typeOfExercice,
-      exercice,
-      forOption,
-      forTarget,
-      timeResult,
-      date
-    );
+    try {
+      await createExerciceToDB(
+        email,
+        typeOfExercice,
+        exercice,
+        forOption,
+        forTarget,
+        timeResult,
+        date
+      );
+
+      setTimeResult({
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      });
+      setForOption("time");
+      setForTarget(0);
+      setDate(new Date());
+      toast.success("Exercice added successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong, try again later");
+    }
   };
 
   return (
@@ -67,24 +85,28 @@ const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
             value={typeOfExercice}
             label='Type of exercice'
             options={typeOfExercices}
-            handleChange={(e: any, value: any) => {
+            handleChange={(e: React.SyntheticEvent, value: string) => {
               value && setTypeOfExercice(dispatch, value?.toLowerCase());
             }}
           />
-          <CancelButton title='Cancel' onClick={onCancel} />
+          <CancelButton title='Close' onClick={onCancel} />
         </FlexContainer>
         <FlexContainer className='items-center'>
           <ExerciceInput
+            value={exercice}
             label='Exercice'
             options={optionsExercice}
-            handleChange={(e: any, value: any) =>
+            handleChange={(e: React.SyntheticEvent, value: string) =>
               setExercice(value.toLowerCase())
             }
           />
           <FlexContainer flex='row' className='my-10'>
             <SelectAddForm
               value={forOption}
-              onChange={(e: any) => setForOption(e.target.value)}
+              onChange={(e: React.SyntheticEvent) => {
+                const target = e.target as typeof e.target & { value: string };
+                target.value && setForOption(target.value);
+              }}
               label='For ( Time / Distance... )'
               classNames='w-full '
               options={forOptions ?? ["time"]}
@@ -94,7 +116,10 @@ const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
               name='for'
               label={capitalizeFirstLetter(forOption)}
               type='number'
-              onChange={(e: any) => setForTarget(e.target.value)}
+              onChange={(e: React.SyntheticEvent) => {
+                const target = e.target as typeof e.target & { value: number };
+                target.value && setForTarget(target.value);
+              }}
               value={forTarget}
             />
           </FlexContainer>
@@ -102,21 +127,24 @@ const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
             hours={timeResult.hours}
             minutes={timeResult.minutes}
             seconds={timeResult.seconds}
-            onHoursChange={(e: any) =>
-              setTimeResult({ ...timeResult, hours: e.target.value })
-            }
-            onMinutesChange={(e: any) =>
-              setTimeResult({ ...timeResult, minutes: e.target.value })
-            }
-            onSecondsChange={(e: any) =>
-              setTimeResult({ ...timeResult, seconds: e.target.value })
-            }
+            onHoursChange={(e: React.SyntheticEvent) => {
+              const target = e.target as typeof e.target & { value: string };
+              setTimeResult({ ...timeResult, hours: parseInt(target.value) });
+            }}
+            onMinutesChange={(e: React.SyntheticEvent) => {
+              const target = e.target as typeof e.target & { value: string };
+              setTimeResult({ ...timeResult, minutes: parseInt(target.value) });
+            }}
+            onSecondsChange={(e: React.SyntheticEvent) => {
+              const target = e.target as typeof e.target & { value: string };
+              setTimeResult({ ...timeResult, seconds: parseInt(target.value) });
+            }}
           />
         </FlexContainer>
         <FlexContainer className='my-10 items-center'>
           <BasicDatePicker
             date={date}
-            setDate={(e: any) => setDate(e.target.value)}
+            setDate={(value: Date) => setDate(value)}
           />
         </FlexContainer>
 

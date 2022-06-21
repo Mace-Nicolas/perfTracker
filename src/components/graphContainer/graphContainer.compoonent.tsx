@@ -1,30 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { AddButton, CancelButton } from "../buttons/buttons.component";
-import ExerciceInput from "../exerciceInput/exerciceInput.component";
 import LineChart from "../lineChart/lineChart.component";
 import AddResultForm from "../addResultForm/addResultForm.component";
 
 import "./graphContainer.component.styles.scss";
 
-import { useTypeOfExercice } from "../../context/typeOfExercice/typeOfExercice-context";
-import { setTypeOfExercice } from "../../context/typeOfExercice/typeOfExerciceActions";
-
-const typeOfExercices = [
-  { name: "Cardio" },
-  { name: "Gym" },
-  { name: "Weightlifting" },
-  { name: "Accessory" },
-  { name: "Wod" },
-];
+import GetDataForm from "../getDataForm/getDataForm.component";
+import { useExerciceData } from "../../context/exerciceData/exerciceData-context";
 
 const GraphContainer = () => {
   const [isAddExerciceActive, setIsAddExerciceActive] = useState(false);
 
   const {
-    state: { typeOfExercice },
-    dispatch,
-  } = useTypeOfExercice();
+    state: { results },
+  } = useExerciceData();
 
   return (
     <div className='graphContainer'>
@@ -37,24 +26,15 @@ const GraphContainer = () => {
             onCancel={() => setIsAddExerciceActive(!isAddExerciceActive)}
           />
         ) : (
-          <>
-            <ExerciceInput
-              value={typeOfExercice}
-              label='Type of exercice'
-              options={typeOfExercices}
-              handleChange={(e: any, value: any) => {
-                value && setTypeOfExercice(dispatch, value?.toLowerCase());
-              }}
-            />
-            <AddButton
-              title='Add a result'
-              onClick={() => setIsAddExerciceActive(!isAddExerciceActive)}
-            />
-          </>
+          <GetDataForm
+            handleSetAddExerciceActive={() =>
+              setIsAddExerciceActive(!isAddExerciceActive)
+            }
+          />
         )}
       </div>
 
-      {!isAddExerciceActive && <LineChart />}
+      {!isAddExerciceActive && <LineChart data={results} />}
     </div>
   );
 };

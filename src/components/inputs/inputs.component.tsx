@@ -40,7 +40,7 @@ export const InputAddForm = ({
   label: string;
   type: string;
   value: string | number;
-  onChange: (e: any) => void;
+  onChange: (e: React.SyntheticEvent) => void;
   className?: string;
 }) => {
   return (
@@ -68,7 +68,7 @@ export const InvisibleInput = ({
   label: string;
   type: string;
   value: string | number;
-  onChange: (e: any) => void;
+  onChange: (e: React.SyntheticEvent) => void;
 }) => {
   return (
     <label
@@ -120,7 +120,7 @@ export const SelectAddForm = ({
   label: string;
   options: string[];
   classNames: string;
-  onChange: (e: any) => void;
+  onChange: (e: React.SyntheticEvent) => void;
 }) => {
   return (
     <label>

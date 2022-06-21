@@ -9,7 +9,7 @@ const BasicDatePicker = ({
   setDate,
 }: {
   date: Date | null;
-  setDate: (date: Date | null) => void;
+  setDate: any;
 }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

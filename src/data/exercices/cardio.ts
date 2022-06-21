@@ -2,7 +2,7 @@ export const cardioExercices = [
   {
     name: "Run",
     typeOfResult: "time",
-    forTypes: ["time", "distance", "cal"],
+    forTypes: ["time", "distance"],
   },
 
   {

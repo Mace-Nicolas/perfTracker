@@ -3,9 +3,9 @@ import { FlexContainer } from "../containers/containers.component";
 import { InputAddForm } from "../inputs/inputs.component";
 
 type TimeProps = {
-  onHoursChange: (e: any) => void;
-  onMinutesChange: (e: any) => void;
-  onSecondsChange: (e: any) => void;
+  onHoursChange: (e: React.SyntheticEvent) => void;
+  onMinutesChange: (e: React.SyntheticEvent) => void;
+  onSecondsChange: (e: React.SyntheticEvent) => void;
   hours: number;
   minutes: number;
   seconds: number;

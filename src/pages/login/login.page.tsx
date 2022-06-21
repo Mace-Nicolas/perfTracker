@@ -16,16 +16,17 @@ const LoginPage = () => {
       <form
         className='loginForm'
         method='POST'
-        onSubmit={(e: any) => e.preventDefault()}
+        onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}
       >
         <ModulableDivider classNames='w-full mt-2 mb-4' />
         <InvisibleInput
           name='email'
           label='EMAIL'
           type='email'
-          onChange={(e: any) =>
-            setLoginForm({ ...loginForm, email: e.target.value })
-          }
+          onChange={(e: React.SyntheticEvent) => {
+            const target = e.target as typeof e.target & { value: string };
+            setLoginForm({ ...loginForm, email: target.value });
+          }}
           value={loginForm.email}
         />
         <ModulableDivider classNames='w-full my-4' />
@@ -33,9 +34,10 @@ const LoginPage = () => {
           name='password'
           label='PASSWORD'
           type='password'
-          onChange={(e: any) =>
-            setLoginForm({ ...loginForm, password: e.target.value })
-          }
+          onChange={(e: React.SyntheticEvent) => {
+            const target = e.target as typeof e.target & { value: string };
+            setLoginForm({ ...loginForm, password: target.value });
+          }}
           value={loginForm.password}
         />
 

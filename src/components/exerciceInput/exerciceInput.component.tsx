@@ -5,14 +5,26 @@ import Autocomplete from "@mui/material/Autocomplete";
 import "./exerciceInput.component.styles.scss";
 import { capitalizeFirstLetter } from "../../utils/functions";
 
-const ExerciceInput = ({ value, options, handleChange, label }: any) => {
+interface ExerciceInputProps {
+  value: string;
+  options: { name: string }[];
+  handleChange: any;
+  label: string;
+}
+
+const ExerciceInput = ({
+  value,
+  options,
+  handleChange,
+  label,
+}: ExerciceInputProps) => {
   return (
     <Autocomplete
       disablePortal
-      options={options.map((option: any) => option.name)}
+      options={options.map((option: { name: string }) => option.name)}
       onChange={handleChange}
       value={value && capitalizeFirstLetter(value)}
-      isOptionEqualToValue={(option: any, value: any) =>
+      isOptionEqualToValue={(option: string, value: string) =>
         option.toLowerCase() === value.toLowerCase()
       }
       sx={{

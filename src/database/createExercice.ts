@@ -9,21 +9,21 @@ import {
 } from "firebase/firestore";
 
 import { capitalizeFirstLetter } from "../utils/functions";
+import { formatDate, formatResult } from "./timeFormatting";
 
 export const createExerciceToDB = async (
   email: string,
   typeOfExercice: string,
   exercice: string,
   forOption: string,
-  forTarget: any,
-  timeResult: any,
-  date: any
+  forTarget: number,
+  timeResult: { hours: number; minutes: number; seconds: number },
+  date: Date
 ) => {
   // exercices/cardio/run/byDistance/1600/time/userEmail/randomId
-  // {result: [{date: 06/05/2022, result: 9.58},...]}
-  // Convert from HH:MM:SS to int like 9.89 for db and chart, then will be converted back again for display
+  // {result: [{date: 06/05/2022, result: 54032},...]}
 
-  const formattedDate = new Date(date).toLocaleString("fr-FR");
+  const formattedDate = formatDate(date);
 
   const collectionRef = collection(
     database,
@@ -31,7 +31,7 @@ export const createExerciceToDB = async (
     typeOfExercice.toLowerCase(),
     exercice.toLowerCase(),
     `by${capitalizeFirstLetter(forOption)}`,
-    forTarget,
+    forTarget.toString(),
     forOption,
     email
   );
@@ -47,17 +47,17 @@ export const createExerciceToDB = async (
     if (firstRecordData) {
       await setDoc(doc(collectionRef, firstRecord), {
         results: [
-          ...firstRecordData.result,
+          ...firstRecordData.results,
           {
             date: formattedDate,
-            result: timeResult,
+            result: formatResult(timeResult),
           },
         ],
       });
     }
   } else {
     await addDoc(collectionRef, {
-      result: [{ date: "13/05/2022", result: 9.58 }],
+      results: [{ date: formattedDate, result: formatResult(timeResult) }],
     });
   }
 };
