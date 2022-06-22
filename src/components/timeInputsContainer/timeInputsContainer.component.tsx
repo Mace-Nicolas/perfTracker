@@ -6,9 +6,9 @@ type TimeProps = {
   onHoursChange: (e: React.SyntheticEvent) => void;
   onMinutesChange: (e: React.SyntheticEvent) => void;
   onSecondsChange: (e: React.SyntheticEvent) => void;
-  hours: number;
-  minutes: number;
-  seconds: number;
+  hours: string;
+  minutes: string;
+  seconds: string;
 };
 
 const TimeInputsContainer = ({
@@ -24,21 +24,24 @@ const TimeInputsContainer = ({
       <InputAddForm
         label='Hours'
         name='for'
-        type='number'
+        type='text'
+        placeholder='HH'
         onChange={onHoursChange}
         value={hours}
       />
       <InputAddForm
         label='Minutes'
         name='for'
-        type='number'
+        type='text'
+        placeholder='MM'
         onChange={onMinutesChange}
         value={minutes}
       />
       <InputAddForm
         label='Seconds'
         name='for'
-        type='number'
+        type='text'
+        placeholder='SS'
         onChange={onSecondsChange}
         value={seconds}
       />

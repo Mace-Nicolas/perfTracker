@@ -1,7 +1,6 @@
 export const convertSecondsToMinutesAndSeconds = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds - minutes * 60;
-  console.log(`${minutes}:${remainingSeconds}`);
   return `${minutes}:${remainingSeconds}`;
 };
 export const convertSecondsToInt = (seconds: number) => {
@@ -17,8 +16,15 @@ export const formatExerciceResFromDB = (exerciceRes: any) => {
   );
 
   formatedRes.sort(
-    (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a: any, b: any) =>
+      createDateFromDDMMYYYY(a.date).getTime() -
+      createDateFromDDMMYYYY(b.date).getTime()
   );
 
   return formatedRes;
+};
+
+export const createDateFromDDMMYYYY = (date: string) => {
+  const [day, month, year] = date.split("/");
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 };

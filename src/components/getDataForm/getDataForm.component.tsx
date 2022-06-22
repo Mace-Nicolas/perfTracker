@@ -28,7 +28,7 @@ const GetDataForm = ({
 }) => {
   const [exercice, setExercice] = useState("run");
   const [forOption, setForOption] = useState("time");
-  const [forTarget, setForTarget] = useState(0);
+  const [forTarget, setForTarget] = useState("");
 
   const forOptions = useForOptions(exercice);
   const optionsExercice = useOptionsOfExercices();
@@ -75,7 +75,7 @@ const GetDataForm = ({
           label='Exercice'
           options={optionsExercice}
           handleChange={(e: React.SyntheticEvent, value: string) =>
-            setExercice(value.toLowerCase())
+            value && setExercice(value.toLowerCase())
           }
         />
         <FlexContainer flex='row' className='mt-5'>
@@ -92,10 +92,11 @@ const GetDataForm = ({
 
           <InputAddForm
             name='for'
+            placeholder='1600'
             label={capitalizeFirstLetter(forOption)}
             type='number'
             onChange={(e: React.SyntheticEvent) => {
-              const target = e.target as typeof e.target & { value: number };
+              const target = e.target as typeof e.target & { value: string };
               setForTarget(target.value);
             }}
             value={forTarget}

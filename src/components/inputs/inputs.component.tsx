@@ -7,18 +7,20 @@ export const InputBasic = ({
   name,
   label,
   type,
+  placeholder,
   value,
 }: {
   name: string;
   label: string;
   type: string;
+  placeholder?: string;
   value: string | number;
 }) => {
   return (
     <label className='flex flex-col w-1/3'>
       {label} :
       <input
-        readOnly
+        placeholder={placeholder}
         type={type}
         name={name}
         className='inputUserInfo w-full'
@@ -33,12 +35,14 @@ export const InputAddForm = ({
   label,
   type,
   value,
+  placeholder,
   onChange,
   className,
 }: {
   name: string;
   label: string;
   type: string;
+  placeholder?: string;
   value: string | number;
   onChange: (e: React.SyntheticEvent) => void;
   className?: string;
@@ -48,7 +52,8 @@ export const InputAddForm = ({
       {useLabelNameAddForm(label)}
       <input
         onChange={onChange}
-        type={type}
+        type='text'
+        placeholder={placeholder}
         name={name}
         className={`inputAddForm ${className}`}
         value={value}

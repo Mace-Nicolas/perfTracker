@@ -7,7 +7,7 @@ export const FlexContainer = ({
   flex = "col",
   side = "left",
 }: {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | any;
   width?: string;
   className?: string;
   flex?: string;

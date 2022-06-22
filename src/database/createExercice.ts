@@ -9,21 +9,62 @@ import {
 } from "firebase/firestore";
 
 import { capitalizeFirstLetter } from "../utils/functions";
-import { formatDate, formatResult } from "./timeFormatting";
+import { formatDate, formatTimeResult } from "./timeFormatting";
 
-export const createExerciceToDB = async (
+export const addExerciceToDB = async (
+  collectionRef: any,
+  formattedDate: any,
+  result: any
+) => {
+  const exerciceRef = await getDocs(collectionRef);
+  const exercicesDocs = exerciceRef.docs;
+
+  if (exercicesDocs.length > 0) {
+    const firstRecord = exercicesDocs[0].id;
+    const firstRecordRef = doc(collectionRef, firstRecord);
+    const firstRecordData = (await getDoc(firstRecordRef)).data();
+    await setDoc(doc(collectionRef, firstRecord), {
+      results: [
+        ...firstRecordData?.results,
+        {
+          date: formattedDate,
+          result,
+        },
+      ],
+    });
+  } else {
+    await addDoc(collectionRef, {
+      results: [{ date: formattedDate, result }],
+    });
+  }
+};
+
+export const formatExerciceForDB = async (
   email: string,
   typeOfExercice: string,
   exercice: string,
   forOption: string,
-  forTarget: number,
-  timeResult: { hours: number; minutes: number; seconds: number },
+  forTarget: string,
+  timeResult: { hours: string; minutes: string; seconds: string },
+  repResult: string,
+  weightResult: string,
+  distanceResult: string,
   date: Date
 ) => {
-  // exercices/cardio/run/byDistance/1600/time/userEmail/randomId
-  // {result: [{date: 06/05/2022, result: 54032},...]}
-
   const formattedDate = formatDate(date);
+
+  let result;
+  let resultType = "";
+
+  if (exercice === "du") {
+    if (forOption === "time ") {
+      result = parseInt(repResult);
+      resultType = "rep";
+    } else if (forOption === "rep") {
+      result = formatTimeResult(timeResult);
+      resultType = "time";
+    }
+  }
 
   const collectionRef = collection(
     database,
@@ -32,32 +73,9 @@ export const createExerciceToDB = async (
     exercice.toLowerCase(),
     `by${capitalizeFirstLetter(forOption)}`,
     forTarget.toString(),
-    forOption,
+    resultType,
     email
   );
 
-  const exerciceRef = await getDocs(collectionRef);
-  const exercicesDocs = exerciceRef.docs;
-
-  if (exercicesDocs.length > 0) {
-    const firstRecord = exercicesDocs[0].id;
-    const firstRecordRef = doc(collectionRef, firstRecord);
-
-    const firstRecordData = (await getDoc(firstRecordRef)).data();
-    if (firstRecordData) {
-      await setDoc(doc(collectionRef, firstRecord), {
-        results: [
-          ...firstRecordData.results,
-          {
-            date: formattedDate,
-            result: formatResult(timeResult),
-          },
-        ],
-      });
-    }
-  } else {
-    await addDoc(collectionRef, {
-      results: [{ date: formattedDate, result: formatResult(timeResult) }],
-    });
-  }
+  await addExerciceToDB(collectionRef, formattedDate, result);
 };

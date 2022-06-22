@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "./lineChart.component.styles.scss";
 
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { formatIntToHHMMSS } from "../../database/timeFormatting";
 
 interface LineChartProps {
   data: { date: string; result: number }[];
+}
+
+function tooltipFormatter(this: any) {
+  const tooltip = `
+  <div>
+  <span>${formatIntToHHMMSS(this.y)}</span></div>`;
+  return tooltip;
 }
 
 const LineChart = ({ data }: LineChartProps) => {
@@ -23,17 +31,12 @@ const LineChart = ({ data }: LineChartProps) => {
       categories: data.map((item) => item.date),
     },
     tooltip: {
-      formatter: (p: any) => {
-        console.log(p);
-        return p.y;
-
-        // return Math.floor(value);
-      },
+      formatter: tooltipFormatter,
     },
 
     yAxis: {
       title: {
-        text: "Results ( HH:MM:SS ) ",
+        text: "Results",
       },
 
       labels: {
