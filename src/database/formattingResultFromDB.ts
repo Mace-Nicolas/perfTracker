@@ -28,3 +28,7 @@ export const createDateFromDDMMYYYY = (date: string) => {
   const [day, month, year] = date.split("/");
   return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 };
+
+export const removeSpacesAndUpperCases = (exercice: string) => {
+  return exercice.toLowerCase().replace(/\s/g, "");
+};

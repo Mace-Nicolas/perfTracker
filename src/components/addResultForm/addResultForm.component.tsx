@@ -41,6 +41,8 @@ const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
     dispatch,
     forOptions,
     optionsExercice,
+    calResult,
+    setCalResult,
   } = useAddFormData();
 
   const resetForms = () => {
@@ -97,6 +99,7 @@ const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
           />
           <ForContainer
             {...{
+              exercice,
               forOption,
               forOptions,
               forTarget,
@@ -107,7 +110,13 @@ const AddResultForm = ({ onCancel }: { onCancel: () => void }) => {
           <ResultInputs
             exercice={exercice}
             forOption={forOption}
+            distanceResult={distanceResult}
+            setDistanceResult={setDistanceResult}
+            calResult={calResult}
+            setCalResult={setCalResult}
             timeResult={timeResult}
+            weightResult={weightResult}
+            setWeightResult={setWeightResult}
             repResult={repResult}
             setRepResult={setRepResult}
             handleTimeChange={{

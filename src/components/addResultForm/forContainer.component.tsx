@@ -1,10 +1,14 @@
-import React from "react";
-import { capitalizeFirstLetter } from "../../utils/functions";
+import React, { useState } from "react";
+
 import { FlexContainer } from "../containers/containers.component";
 import { InputAddForm, SelectAddForm } from "../inputs/inputs.component";
+
 import { handleOnInputChange } from "./formEventHandlers";
 
+import { capitalizeFirstLetter } from "../../utils/functions";
+
 interface ForContainerProps {
+  exercice: string;
   forOption: string;
   forOptions: string[] | undefined;
   forTarget: string;
@@ -13,6 +17,7 @@ interface ForContainerProps {
 }
 
 const ForContainer = ({
+  exercice,
   forOption,
   forOptions,
   forTarget,
@@ -27,7 +32,7 @@ const ForContainer = ({
           handleOnInputChange(e, setForOption)
         }
         label='For ( Time / Distance... )'
-        classNames='w-full '
+        className='w-full '
         options={forOptions ?? ["time"]}
       />
 

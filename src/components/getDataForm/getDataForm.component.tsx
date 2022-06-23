@@ -86,7 +86,7 @@ const GetDataForm = ({
               setForOption(target.value);
             }}
             label='For ( Time / Distance... )'
-            classNames='w-full '
+            className='w-full '
             options={forOptions ?? ["time"]}
           />
 

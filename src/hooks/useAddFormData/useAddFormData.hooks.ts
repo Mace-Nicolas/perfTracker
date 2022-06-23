@@ -14,6 +14,7 @@ export const useAddFormData = () => {
   const [forTarget, setForTarget] = useState("");
   const [date, setDate] = useState(new Date());
 
+  const [calResult, setCalResult] = useState("");
   const [repResult, setRepResult] = useState("");
   const [weightResult, setWeightResult] = useState("");
   const [distanceResult, setDistanceResult] = useState("");
@@ -56,5 +57,7 @@ export const useAddFormData = () => {
     dispatch,
     forOptions,
     optionsExercice,
+    calResult,
+    setCalResult,
   };
 };

@@ -114,17 +114,18 @@ export const SelectBasic = ({
     </label>
   );
 };
-export const SelectAddForm = ({
+
+export const SelectForOption = ({
   value,
   label,
   options,
-  classNames,
+  className,
   onChange,
 }: {
   value: string;
   label: string;
   options: string[];
-  classNames: string;
+  className?: string;
   onChange: (e: React.SyntheticEvent) => void;
 }) => {
   return (
@@ -133,7 +134,37 @@ export const SelectAddForm = ({
       <select
         onChange={onChange}
         value={value}
-        className={`selectAddForm flex flex-row ${classNames}`}
+        className={`selectAddForm flex flex-row ${className}`}
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option === "time" ? "Rep" : capitalizeFirstLetter(option)}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+};
+export const SelectAddForm = ({
+  value,
+  label,
+  options,
+  className,
+  onChange,
+}: {
+  value: string;
+  label: string;
+  options: string[];
+  className?: string;
+  onChange: (e: React.SyntheticEvent) => void;
+}) => {
+  return (
+    <label>
+      {label}
+      <select
+        onChange={onChange}
+        value={value}
+        className={`selectAddForm flex flex-row ${className}`}
       >
         {options.map((option) => (
           <option key={option} value={option}>
